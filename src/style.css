@@ -1,0 +1,41 @@
+:root {
+        font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; 
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+
+    background-color: antiquewhite;
+}
+
+.grid {
+    display: grid;
+    grid-template: repeat(auto-fit, 50px) / 1fr;
+}
+
+.flex {
+    display: flex;
+}
+
+.project-container {
+    margin: 5vw 30vw;
+    padding: 50px;
+    border-radius: 20px;
+    height:80vh;
+    background-color: white;
+}
+.title {
+}
+
+.grid.card {
+    margin: 50px;
+}
+
+.flex.card {
+}
+
