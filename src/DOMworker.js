@@ -1,3 +1,5 @@
+import ProjectCollection from "./ProjectCollection";
+
 export default new class DOMworker {
     createProject (project) {
         const projectElement = document.createElement('div');
@@ -7,6 +9,17 @@ export default new class DOMworker {
         projectName.textContent = project.name;
         projectElement.appendChild(projectName);
 
-        document.querySelector('button').before(projectElement);
+        const removeButton = document.createElement('button')
+        removeButton.textContent = 'X';
+        removeButton.addEventListener('click', ()=>{
+            ProjectCollection.removeProject(project);
+            this.removeProject(projectElement);
+        } );
+        projectElement.appendChild(removeButton);
+
+        document.querySelector('.remove').before(projectElement);
+    }
+    removeProject (projectElement) {
+        projectElement.remove();        
     }
 }
