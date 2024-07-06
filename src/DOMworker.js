@@ -1,4 +1,5 @@
 import ProjectCollection from "./ProjectCollection";
+import Todo from "./Todo";
 
 export default new class DOMworker {
     createProject (project) {
@@ -17,9 +18,29 @@ export default new class DOMworker {
         } );
         projectElement.appendChild(removeButton);
 
+        const todoListElement = document.createElement('div');
+        todoListElement.classList.toggle('flex');
+        projectElement.appendChild(todoListElement);
+
+        const todoButton = document.createElement('button')
+        todoButton.textContent = '+';
+        todoButton.addEventListener('click', ()=>{
+            this.createTodo(project, todoButton);
+        } );
+        todoListElement.appendChild(todoButton);
+
+
         document.querySelector('.remove').before(projectElement);
     }
     removeProject (projectElement) {
         projectElement.remove();        
+    }
+
+    createTodo (project, todoButton) {
+        const newTodo = new Todo();
+        project.addTodo(newTodo);
+        const todoElement = document.createElement('li');
+        todoElement.textContent = newTodo.name;
+        todoButton.before(todoElement);
     }
 }
