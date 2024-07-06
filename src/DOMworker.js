@@ -7,6 +7,6 @@ export default new class DOMworker {
         projectName.textContent = project.name;
         projectElement.appendChild(projectName);
 
-        document.querySelector('.project-container').appendChild(projectElement);
+        document.querySelector('button').before(projectElement);
     }
 }
