@@ -5,4 +5,8 @@ export default new class ProjectCollection  {
         this.projects[project.name] = project;
     }
 
+    removeProject (project) {
+        delete this.projects[project.name];
+    }
+
 }

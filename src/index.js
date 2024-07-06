@@ -4,4 +4,3 @@ import './style.css'
 
 const defaultProject = new Project();
 ProjectCollection.addProject(defaultProject);
-console.log(ProjectCollection)
