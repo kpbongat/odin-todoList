@@ -26,9 +26,10 @@ export default new class DOMworker {
         projectElement.appendChild(todoListElement);
 
         const todoButton = document.createElement('button')
+        todoButton.setAttribute('type','button');
         todoButton.textContent = '+';
         todoButton.addEventListener('click', ()=>{
-            this.createTodo(project, todoButton);
+            this.createTodoElement(project, todoButton);
         } );
         todoListElement.appendChild(todoButton);
 
@@ -39,23 +40,46 @@ export default new class DOMworker {
         element.remove();        
     }
 
-    createTodo (project, todoButton) {
-        const newTodo = new Todo();
-        project.addTodo(newTodo);
-        const todoWrapper = document.createElement('div');
-        todoWrapper.classList.toggle('flex');
-        const todoElement = document.createElement('li');
-        todoElement.textContent = newTodo.name;
+    createTodoElement (project, todoButton) {
+        const createTodo = () => {
+            const newTodo = new Todo(todoInput.value);
+            project.addTodo(newTodo);
+            const todoText = document.createElement('span');
+            todoText.textContent = newTodo.name;
+            todoInput.replaceWith(todoText);
+            this.removeElement(todoSubmit);
+        }
+        const todoElement = document.createElement('div');
+        todoElement.classList.toggle('flex');
+        const todoInput = document.createElement('input');
+        todoInput.addEventListener('keypress',(e)=>{
+            if (e.code==='Enter') {
+                createTodo();
+            }
+        })
+        todoElement.appendChild(todoInput);
+        const todoSubmit = document.createElement('button');
+        todoSubmit.textContent = '✓';
+        todoElement.appendChild(todoSubmit)
+        todoSubmit.addEventListener('click', createTodo);
+
         const removeButton = document.createElement('button')
         removeButton.textContent = 'X';
         removeButton.addEventListener('click', ()=>{
             project.removeTodo(project);
             this.removeElement(todoElement);
         } );
-        todoWrapper.appendChild(todoElement);
-        todoWrapper.appendChild(removeButton);
+
+        todoElement.appendChild(removeButton);
         
-        todoButton.before(todoWrapper);
+        todoButton.before(todoElement);
+
+
+
+
     }
+
+
+
 
 }
