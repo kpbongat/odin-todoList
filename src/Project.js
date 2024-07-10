@@ -7,4 +7,8 @@ export default class Project {
     addTodo (todo) {
         this.todoCollection[todo.name] = todo;
     }
+
+    removeTodo (todo) {
+        delete this.todoCollection[todo.name];
+    }
 }
