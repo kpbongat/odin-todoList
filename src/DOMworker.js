@@ -6,9 +6,12 @@ export default new class DOMworker {
         const projectElement = document.createElement('div');
         projectElement.classList.toggle('project');
 
+        const projectHeader = document.createElement('div');
+        projectHeader.classList.toggle('flex');
+
         const projectName = document.createElement('h2');
         projectName.textContent = project.name;
-        projectElement.appendChild(projectName);
+        projectHeader.appendChild(projectName);
 
         const removeButton = document.createElement('button')
         removeButton.textContent = 'X';
@@ -16,10 +19,10 @@ export default new class DOMworker {
             ProjectCollection.removeProject(project);
             this.removeElement(projectElement);
         } );
-        projectElement.appendChild(removeButton);
+        projectHeader.appendChild(removeButton);
+        projectElement.appendChild(projectHeader);
 
         const todoListElement = document.createElement('div');
-        todoListElement.classList.toggle('flex');
         projectElement.appendChild(todoListElement);
 
         const todoButton = document.createElement('button')
@@ -39,6 +42,8 @@ export default new class DOMworker {
     createTodo (project, todoButton) {
         const newTodo = new Todo();
         project.addTodo(newTodo);
+        const todoWrapper = document.createElement('div');
+        todoWrapper.classList.toggle('flex');
         const todoElement = document.createElement('li');
         todoElement.textContent = newTodo.name;
         const removeButton = document.createElement('button')
@@ -47,8 +52,10 @@ export default new class DOMworker {
             project.removeTodo(project);
             this.removeElement(todoElement);
         } );
-        todoElement.appendChild(removeButton);
-        todoButton.before(todoElement);
+        todoWrapper.appendChild(todoElement);
+        todoWrapper.appendChild(removeButton);
+        
+        todoButton.before(todoWrapper);
     }
 
 }
