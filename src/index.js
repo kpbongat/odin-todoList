@@ -8,7 +8,7 @@ const defaultProject = new Project();
 ProjectCollection.addProject(defaultProject);
 DOMworker.createProject(defaultProject);
 
-document.querySelector('.remove').addEventListener('click', ()=>{
+document.querySelector('.new-button').addEventListener('click', ()=>{
     const newProject = new Project();
     ProjectCollection.addProject(newProject);
     DOMworker.createProject(newProject);

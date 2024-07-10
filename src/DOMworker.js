@@ -30,7 +30,7 @@ export default new class DOMworker {
         todoListElement.appendChild(todoButton);
 
 
-        document.querySelector('.remove').before(projectElement);
+        document.querySelector('.new-button').before(projectElement);
     }
     removeProject (projectElement) {
         projectElement.remove();        
