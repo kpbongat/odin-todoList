@@ -27,7 +27,7 @@ body {
     margin: 5vw 30vw;
     padding: 50px;
     border-radius: 20px;
-    height:80vh;
+    min-height:80vh;
     background-color: white;
 }
 .title {
