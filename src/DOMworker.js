@@ -44,8 +44,14 @@ export default new class DOMworker {
         const createTodo = () => {
             const newTodo = new Todo(todoInput.value);
             project.addTodo(newTodo);
-            const todoText = document.createElement('span');
+            const todoText = document.createElement('button');
+            todoText.setAttribute('type','button');
             todoText.textContent = newTodo.name;
+            this.setTodoDialog(newTodo);
+            todoText.addEventListener('click', ()=>{
+                document.querySelector('dialog').showModal();
+            })
+            
             todoInput.replaceWith(todoText);
             this.removeElement(todoSubmit);
         }
@@ -77,6 +83,11 @@ export default new class DOMworker {
 
 
 
+    }
+
+    setTodoDialog (todo) {
+        const nameLabel = document.querySelector('label');
+        nameLabel.textContent = todo.name;
     }
 
 

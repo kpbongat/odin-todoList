@@ -12,3 +12,11 @@ document.querySelector('.new-button').addEventListener('click', ()=>{
     ProjectCollection.addProject(newProject);
     DOMworker.createProject(newProject);
 })
+
+const dialog = document.querySelector('dialog');
+dialog.addEventListener('click', (e)=>{
+    if (e.target === dialog){
+        dialog.close();    
+    }
+
+})
