@@ -47,8 +47,8 @@ export default new class DOMworker {
             const todoText = document.createElement('button');
             todoText.setAttribute('type','button');
             todoText.textContent = newTodo.name;
-            this.setTodoDialog(newTodo);
             todoText.addEventListener('click', ()=>{
+                this.setTodoDialog(newTodo);
                 document.querySelector('dialog').showModal();
             })
             
