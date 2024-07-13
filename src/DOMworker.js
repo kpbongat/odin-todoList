@@ -90,7 +90,11 @@ export default new class DOMworker {
         nameInput.value = todo.name;
         const descInput = document.querySelector('#desc');
         descInput.textContent = todo.desc;
-        const dueDateInput = document.querySelector('#dueDate');     }
+        const dueDateInput = document.querySelector('#dueDate');    
+        dueDateInput.value = todo.dueDate;
+        const priorityInput = document.querySelector('#priority');
+        priorityInput.value = todo.priority; 
+    }
 
 
 
