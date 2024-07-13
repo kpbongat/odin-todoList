@@ -87,9 +87,9 @@ export default new class DOMworker {
 
     setTodoDialog (todo) {
         const nameInput = document.querySelector('#name');
-        nameLabel.value = todo.name;
+        nameInput.value = todo.name;
         const descInput = document.querySelector('#desc');
-        descLabel.textContent = todo.desc;
+        descInput.textContent = todo.desc;
     }
 
 
