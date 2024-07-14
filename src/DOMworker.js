@@ -48,7 +48,7 @@ export default new class DOMworker {
             todoText.setAttribute('type','button');
             todoText.textContent = newTodo.name;
             todoText.addEventListener('click', ()=>{
-                this.setTodoDialog(newTodo);
+                this.setTodoDialog(project.getTodo(todoText.textContent), project);
                 document.querySelector('dialog').showModal();
             })
             
@@ -85,18 +85,63 @@ export default new class DOMworker {
 
     }
 
-    setTodoDialog (todo) {
-        const nameInput = document.querySelector('#name');
-        nameInput.value = todo.name;
-        const descInput = document.querySelector('#desc');
-        descInput.textContent = todo.desc;
-        const dueDateInput = document.querySelector('#dueDate');    
+    setTodoDialog (todo, project) {
+        const modalForm = document.createElement('form')
+        modalForm.setAttribute('method','dialog');  
+        modalForm.classList.toggle('grid');
+        modalForm.classList.toggle('grid-form');
+
+        const nameLabel = document.createElement('label');
+        nameLabel.setAttribute('id','name');
+        nameLabel.textContent = todo.name;
+        modalForm.appendChild(nameLabel);
+
+        const descLabel = document.createElement('label');
+        descLabel.setAttribute('for','desc');
+        descLabel.textContent = 'Description'
+        modalForm.appendChild(descLabel);
+
+        const descInput = document.createElement('textarea');
+        descInput.setAttribute('id','desc');
+        descInput.value = todo.desc;
+        modalForm.appendChild(descInput);
+
+        const dueDateLabel = document.createElement('label');
+        dueDateLabel.setAttribute('for','dueDate');
+        dueDateLabel.textContent = 'Due Date'
+        modalForm.appendChild(dueDateLabel);
+
+        const dueDateInput = document.createElement('input');  
+        dueDateInput.setAttribute('type','date');  
+        dueDateInput.setAttribute('id','dueDate');
         dueDateInput.value = todo.dueDate;
-        const priorityInput = document.querySelector('#priority');
+        modalForm.appendChild(dueDateInput);
+
+        const priorityLabel = document.createElement('label');
+        priorityLabel.setAttribute('for','priority');
+        priorityLabel.textContent = 'Priority'
+        modalForm.appendChild(priorityLabel);
+
+        const priorityInput = document.createElement('input');
+        priorityInput.setAttribute('type','number');  
+        priorityInput.setAttribute('id','priority');
         priorityInput.value = todo.priority; 
+        modalForm.appendChild(priorityInput);
+
+
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Save'
+        saveButton.setAttribute('type','button');
+        saveButton.setAttribute('id','save');
+
+        saveButton.addEventListener('click', ()=>{
+            const newTodo = new Todo(todo.name, descInput.value, dueDateInput.value, priorityInput.value);
+            project.addTodo(newTodo);
+        })
+
+        modalForm.appendChild(saveButton);
+        document.querySelector('dialog').appendChild(modalForm);
     }
-
-
 
 
 }

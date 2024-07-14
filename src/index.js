@@ -17,6 +17,8 @@ const dialog = document.querySelector('dialog');
 dialog.addEventListener('click', (e)=>{
     if (e.target === dialog){
         dialog.close();    
+        dialog.querySelector('form').remove();
     }
 
 })
+

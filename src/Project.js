@@ -11,4 +11,8 @@ export default class Project {
     removeTodo (todo) {
         delete this.todoCollection[todo.name];
     }
+
+    getTodo(todoName) {
+        return this.todoCollection[todoName];
+    }
 }
